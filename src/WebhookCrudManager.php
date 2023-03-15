@@ -111,7 +111,7 @@ class WebhookCrudManager {
       //Enviar correo a usuario y marketing
       $module = 'ppss';
       $key = 'cancel_subscription';
-      $to = $subscription->mail."; marketing@noticiasnet.mx";
+      $to = $subscription->mail.";".\Drupal::config('system.site')->get('mail');
       $params['message'] = $msg;
       $params['subject'] = "Cancelación de suscripción - Encuéntralo";
       $langcode = \Drupal::currentUser()->getPreferredLangcode();
@@ -140,18 +140,26 @@ class WebhookCrudManager {
     $results = $query->execute()->fetchAll();
     $subscription = $results[0];
     $details = json_decode($subscription->details);
+    
     try {
-      $query = \Drupal::database()->insert('ppss_sales_details');
-      $query->fields(['sid', 'tax', 'price', 'total', 'created', 'event_id']);
-      $query->values([
-        $subscription->id,
-        $details->plan->payment_definitions[0]->charge_models[0]->amount->value,
-        $details->plan->payment_definitions[0]->amount->value,
-        $data->resource->amount->total,
-        strtotime($data->create_time),
-        $data->id
-      ]);
-      $query->execute();
+      $payment = \Drupal::database()->select('ppss_sales_details', 's')->condition('sid', $subscription->id)->condition('event_id', 0)->fields('s')->execute()->fetchAll();
+      if(count($payment) == 1){
+        \Drupal::database()->update('ppss_sales_details')->fields([
+          'event_id' => $data->id,
+        ])->condition('sid', $payment[0]->id, '=')->execute();
+      } else {
+        $query = \Drupal::database()->insert('ppss_sales_details');
+        $query->fields(['sid', 'tax', 'price', 'total', 'created', 'event_id']);
+        $query->values([
+          $subscription->id,
+          $details->plan->payment_definitions[0]->charge_models[0]->amount->value,
+          $details->plan->payment_definitions[0]->amount->value,
+          $data->resource->amount->total,
+          strtotime($data->create_time),
+          $data->id
+        ]);
+        $query->execute();
+      }
     } catch (\Exception $e) {
       \Drupal::logger('PPSS')->error($e->getMessage());
     }
