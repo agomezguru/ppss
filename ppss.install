@@ -86,7 +86,7 @@ function ppss_schema()
  * Implements ppss_update_9101().
  * Add new field in ppss_sales table.
  */
-function ppss_update_9101() {
+function ppss_update_10101() {
   $schema = Database::getConnection()->schema();
   $schema->addField('ppss_sales', 'id_subscription', [
     'type' => 'varchar',
@@ -115,7 +115,7 @@ function ppss_update_9101() {
  * Implements ppss_update_9102().
  * Add new table ppss_sales_details.
  */
-function ppss_update_9102() {
+function ppss_update_10102() {
   //$database = \Drupal::database();
   $schema = Database::getConnection()->schema();
 
