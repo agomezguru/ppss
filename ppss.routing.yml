@@ -6,24 +6,13 @@ ppss.admin_settings:
     _title: PPSS Settings
   requirements:
     _permission: administer ppss
-
-#ppss.admin_roles_links:
-#  path: /admin/config/services/ppss/roles
-#  defaults:
-#    _form: \Drupal\ppss\Form\PPSSFormRolesSettings
-#    _title: PPSS Roles & SKUs
-#  requirements:
-#    _permission: administer ppss
-
-# Webhook notification settings
-ppss.webhook_settings:
-  path: /admin/config/services/ppss/webhook
-  defaults:
-    _form: \Drupal\ppss\Form\PPSSFormWebhook
-    _title: PPSS Webhook token
+ppss.admin_settings_paypal:
+  path: /admin/config/services/ppss/paypal
+  defaults: 
+    _form: \Drupal\ppss\Form\PPSSFormSettingsPaypal
+    _title: PayPal
   requirements:
-    _permission: administer site configuration
-
+    _permission: administer ppss
 # The route where notification incoming calls are received.
 ppss.webhook_listener:
   path: /ppss/webhook/listener

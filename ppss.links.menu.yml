@@ -4,17 +4,3 @@ ppss.admin_settings_link:
   route_name: ppss.admin_settings
   parent: system.admin_config_services
   weight: 10
-
-ppss.admin_webhook_link:
-  title: Webhook
-  route_name: ppss.webhook_settings
-  description: Settings for administering the webhook token.
-  parent: ppss.admin_settings_link
-  weight: 20
-
-#ppss.admin_settings_roles_link:
-#  title: Roles & SKUs
-#  route_name: ppss.admin_roles_links
-#  description: Settings for administering the Roles links with his SKUs.
-#  parent: ppss.admin_settings_link
-#  weight: 20

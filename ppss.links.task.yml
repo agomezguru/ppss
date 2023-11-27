@@ -4,14 +4,8 @@ ppss.admin_settings:
   base_route: ppss.admin_settings
   weight: 0
   
-ppss.admin_webhook_link:
- route_name: ppss.webhook_settings
- title: Webhook
+ppss.admin_settings_paypal:
+ route_name: ppss.admin_settings_paypal
+ title: PayPal
  base_route: ppss.admin_settings
  weight: 10
-
-#ppss.admin_settings_roles.link:
-#  route_name: ppss.admin_roles_links
-#  title: Roles & SKUs
-#  base_route: ppss.admin_settings
-#  weight: 10
