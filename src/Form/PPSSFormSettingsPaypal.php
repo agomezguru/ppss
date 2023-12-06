@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Content the settings for administering the PPSS form.
+ * Content the settings for administering the PPSS Paypal form.
  */
 
 namespace Drupal\ppss\Form;
@@ -93,7 +93,7 @@ class PPSSFormSettingsPaypal extends ConfigFormBase
     $form['fields'] = [
       '#type' => 'details',
       '#title' => $this->t('Fields names settings'),
-      '#open' => FALSE,
+      '#open' => true,
     ];
 
     $form['fields']['description'] = [
@@ -158,7 +158,7 @@ class PPSSFormSettingsPaypal extends ConfigFormBase
     $form['paypal_settings'] = [
       '#type' => 'details',
       '#title' => $this->t('PayPal Settings'),
-      '#open' => true,
+      '#open' => false,
     ];
 
     $form['paypal_settings']['description'] = [
